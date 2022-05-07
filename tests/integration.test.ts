@@ -3,7 +3,7 @@ import app from "../src/app.js"
 import { prisma } from "../src/database.js";
 import { CreateRecommendationData } from "../src/services/recommendationsService.js";
 
-describe("integration get tests",()=>{
+describe("test get",()=>{
   const recommendation: CreateRecommendationData = {
     name: "Avicii - The Nights",
     youtubeLink: "https://www.youtube.com/watch?v=UtF6Jej8yb4"

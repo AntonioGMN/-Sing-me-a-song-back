@@ -1,7 +1,7 @@
 import { Request, Response } from "express";
-import reset from "../services/resetDBService.js";
+import * as resetService from "../services/resetDBService.js";
 
 export default async function resetDB(req: Request, res: Response){
-  await reset()
+  await resetService.reset();
   res.sendStatus(200);
 }

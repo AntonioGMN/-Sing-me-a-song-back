@@ -7,8 +7,8 @@
   "scripts": {
     "dev": "nodemon src/server.ts",
     "test": "NODE_OPTIONS=--experimental-vm-modules dotenv -e .env.test jest -i",
-    "dev-test": "NODE_OPTIONS=--experimental-vm-modules dotenv -e .env.test nodemon src/server.ts",
-    "studio-test": "npx dotenv -e .env.test prisma studio",
+    "dev:test": "NODE_OPTIONS=--experimental-vm-modules dotenv -e .env.test nodemon src/server.ts",
+    "studio:test": "npx dotenv -e .env.test prisma studio",
     "test:coverage": "NODE_OPTIONS=--experimental-vm-modules dotenv -e .env.test jest -i -- --coverage",
     "test:unitario": "NODE_OPTIONS=--experimental-vm-modules dotenv -e .env.test jest ./unitario/serviceTests"
   },

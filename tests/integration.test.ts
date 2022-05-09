@@ -3,7 +3,7 @@ import app from "../src/app.js"
 import { prisma } from "../src/database.js";
 import { CreateRecommendationData } from "../src/services/recommendationsService.js";
 
-describe("test get",()=>{
+describe("test get routers",()=>{
   const recommendation: CreateRecommendationData = {
     name: "Avicii - The Nights",
     youtubeLink: "https://www.youtube.com/watch?v=UtF6Jej8yb4"
@@ -54,7 +54,7 @@ describe("test get",()=>{
   });
 })
 
-describe("tests posts", ()=>{
+describe("tests posts routers", ()=>{
   const recommendation: CreateRecommendationData = {
     name: "Avicii - The Nights",
     youtubeLink: "https://www.youtube.com/watch?v=UtF6Jej8yb4"
@@ -72,11 +72,15 @@ describe("tests posts", ()=>{
     expect(response.status).toEqual(201);
   })
 
+  it("thorw erro for a invalid body in to insert recommendation", async function () {
+    const response = await supertest(app).post('/recommendations').send(null)
+    expect(response.status).toEqual(422)
+  })
+
   it("test upvote ", async ()=>{
     const { name,id, score} = await prisma.recommendation.create({
       data: recommendation
     });
-    console.log( id)
 
     const response = await supertest(app).post(`/recommendations/${id}/upvote`);
     const {score: newscore} = await prisma.recommendation.findUnique({
@@ -108,4 +112,11 @@ describe("tests posts", ()=>{
   afterAll(async () => {
     await prisma.$disconnect();
   });
+})
+
+describe("Test delete reouters", ()=>{
+  it("test reset", async ()=>{
+    const response = await supertest(app).delete("/recommendations/reset")
+    expect(response.status).toEqual(200)
+  })
 })
